@@ -30,7 +30,7 @@ Overse comes packed with essential features that make browsing a pleasure:
 - PyQt5
 
 First, clone the repository to your local machine:
-```bash
+
 git clone https://github.com/DevPatel3547/OverseBrowser.git
 
 Navigate into the cloned repository:
