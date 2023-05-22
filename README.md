@@ -31,7 +31,7 @@ Overse comes packed with essential features that make browsing a pleasure:
 
 First, clone the repository to your local machine:
 
-git clone https://github.com/DevPatel3547/OverseBrowser.git
+git clone https://github.com/DevPatel3547/OverseBrowser.git or you can use ssh, zip etc.
 
 Navigate into the cloned repository:
 cd Overse
