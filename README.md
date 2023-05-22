@@ -1,32 +1,40 @@
-# Overse: A Simple Web Browser
+# Overse: A Simple, Feature-rich Web Browser
 
-Overse is a minimal web browser built with Python using PyQt5. The project is intended to demonstrate the capabilities of PyQt5's WebEngine module.
+Overse is a minimal, yet powerful web browser built with Python and PyQt5. It combines simplicity and efficiency, providing a friendly browsing experience.
+
+
+
+## Table of Contents
+
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
 
 ## Features
 
-1. **Tabbed Browsing:** You can open multiple tabs and navigate independently in each tab.
-2. **Navigation Tools:** You can navigate back and forward, reload pages and return to a home page.
-3. **Omnibox:** You can type URLs into the omnibox to navigate to web pages, and the omnibox offers suggestions based on your browsing history.
-4. **Bookmarks:** You can bookmark pages and navigate to your bookmarked pages from any tab.
-5. **User Profile:** You can create a user profile and retrieve it in future sessions.
+Overse comes packed with essential features that make browsing a pleasure:
+
+- **Tabbed Browsing:** Browse multiple sites at once. Each tab operates independently, allowing for multitasking.
+- **Omnibox:** The smart URL box suggests URLs from your history, making navigation faster.
+- **Navigation Tools:** Includes the essential navigation tools - back, forward, and reload. Plus, a home button to get you back to your homepage.
+- **Bookmarks:** Like a page? Bookmark it! The Bookmark feature makes it easy to return to your favorite pages.
+- **User Profile:** Create and load user profiles for personalized browsing experiences.
 
 ## Installation
 
-This project requires Python 3 and PyQt5.
+### Requirements
 
-Clone the repository to your local machine: https://github.com/DevPatel3547/OverseBrowser.git
+- Python 3
+- PyQt5
 
+First, clone the repository to your local machine:
+```bash
+git clone https://github.com/DevPatel3547/OverseBrowser.git
 
-## Usage
-
-To run the browser, navigate to the directory containing `main.py` and run: python main.py
-
-## Contributing
-
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
-
-
-
-
-
+Navigate into the cloned repository:
+cd Overse
+Install PyQt5 using pip:
+pip install PyQt5
 
