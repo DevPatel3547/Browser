@@ -3,7 +3,7 @@ import database
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtWebEngineWidgets import *
-
+from PyQt5.QtGui import *
 from user_management import create_user, get_user
 
 #Tabbed browsing
@@ -12,7 +12,7 @@ class BrowserTab(QWidget):
         super(BrowserTab, self).__init__(parent)
         self.browser = QWebEngineView()
         self.browser.setUrl(QUrl('http://google.com'))
-
+        self.browser.loadProgress.connect(self.update_progress)
         layout = QVBoxLayout()
         layout.addWidget(self.browser)
 
@@ -20,7 +20,8 @@ class BrowserTab(QWidget):
     
     def navigate_to_url(self, url):
         self.browser.setUrl(QUrl(url))
-
+    def update_progress(self, p):
+        window.status.showMessage(f'Loading... {p}%', 2000 if p==100 else 0)
 class Omnibox(QLineEdit):
     def __init__(self, parent=None):
         super(Omnibox, self).__init__(parent)
@@ -80,37 +81,52 @@ class MainWindow(QMainWindow):
         #navbar 
         navbar = QToolBar()
         self.addToolBar(navbar)
-        
+                
         #backbutton
-        backbutton = QAction('<-', self)
+        backbutton = QAction(QIcon('./images/back.png'), '<-', self)
         backbutton.triggered.connect(self.navigate_back)
         navbar.addAction(backbutton)
 
         #frontbutton
-        frontbutton = QAction('->', self)
+        frontbutton = QAction(QIcon('./images/forward.png'), '->', self)
         frontbutton.triggered.connect(self.navigate_forward)
         navbar.addAction(frontbutton)
 
         #reloadbutton
-        reloadbutton = QAction('Reload', self)
+        reloadbutton = QAction(QIcon('./images/reload.png'), 'Reload', self)
         reloadbutton.triggered.connect(self.navigate_reload)
         navbar.addAction(reloadbutton)
 
-        
         #homebutton
-        homebutton = QAction('Home', self)
+        homebutton = QAction(QIcon('./images/home.png'), 'Home', self)
         homebutton.triggered.connect(self.navigate_home)
         navbar.addAction(homebutton)
-        
+                
         #urlbar
         self.url_bar = Omnibox()
         self.url_bar.returnPressed.connect(self.navigatetourl)
         navbar.addWidget(self.url_bar)
-        
+
         # User profile button
-        user_button = QAction('User', self)
+        user_button = QAction(QIcon('./images/user.png'), 'User', self)
         user_button.triggered.connect(self.show_user_profile)
         navbar.addAction(user_button)
+
+        # Adding actions to the navigation bar
+        add_tab_action = QAction(QIcon('./images/addtab.png'), 'Add Tab', self)
+        add_tab_action.triggered.connect(self.add_tab)
+        navbar.addAction(add_tab_action)
+
+        bookmark_action = QAction(QIcon('./images/bookmark.png'), 'Bookmark', self)
+        bookmark_action.triggered.connect(self.bookmark_page)
+        navbar.addAction(bookmark_action)
+                
+        select_bookmark_action = QAction(QIcon('./images/selectbookmark.png'), 'Select Bookmark', self)
+        select_bookmark_action.triggered.connect(self.select_bookmark)
+        navbar.addAction(select_bookmark_action)
+        
+        self.status = QStatusBar()
+        self.setStatusBar(self.status)
 
         # Tabbed browsing
         self.tabs = QTabWidget()
@@ -118,24 +134,44 @@ class MainWindow(QMainWindow):
         self.tabs.setTabsClosable(True)
         self.tabs.tabCloseRequested.connect(self.close_tab)
         
-        self.setCentralWidget(self.tabs)
+        main_layout = QVBoxLayout()
+        main_layout.addWidget(self.tabs)
+        main_layout.setContentsMargins(0, 0, 0, 0)
+        main_layout.setSpacing(0)
+
+        main_widget = QWidget()
+        main_widget.setLayout(main_layout)
+        self.setCentralWidget(main_widget)
         self.showMaximized()
 
-        # Adding actions to the navigation bar
-        add_tab_action = QAction('Add Tab', self)
-        add_tab_action.triggered.connect(self.add_tab)
-        navbar.addAction(add_tab_action)
 
-        bookmark_action = QAction('Bookmark', self)
-        bookmark_action.triggered.connect(self.bookmark_page)
-        navbar.addAction(bookmark_action)
-        
-        select_bookmark_action = QAction('Select Bookmark', self)
-        select_bookmark_action.triggered.connect(self.select_bookmark)
-        navbar.addAction(select_bookmark_action)
 
         self.bookmarks = {}
         self.add_tab()
+        
+        self.setStyleSheet("""
+            QMainWindow {
+                background-color: #333;
+            }
+
+            QToolBar {
+                background-color: #555;
+            }
+
+            QLineEdit {
+                height: 25px;
+                background-color: #fff;
+                color: #000;
+            }
+
+            QPushButton {
+                background-color: #f00;
+                color: #fff;
+                height: 25px;
+                border: none;
+            }
+        """)
+
 
     def show_user_profile(self):
         dialog = UserProfileDialog(self)
