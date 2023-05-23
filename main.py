@@ -1,5 +1,6 @@
 import sys
 import database
+from history import History
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtWebEngineWidgets import *
@@ -20,8 +21,10 @@ class BrowserTab(QWidget):
     
     def navigate_to_url(self, url):
         self.browser.setUrl(QUrl(url))
+        window.history.add_to_history(url)
     def update_progress(self, p):
         window.status.showMessage(f'Loading... {p}%', 2000 if p==100 else 0)
+        
 class Omnibox(QLineEdit):
     def __init__(self, parent=None):
         super(Omnibox, self).__init__(parent)
@@ -78,10 +81,17 @@ class MainWindow(QMainWindow):
         # Initialize user
         self.user = None
 
+        #initialize history
+        self.history = History()
+
+        history_action = QAction(QIcon('./images/history.png'), 'History', self)
+        history_action.triggered.connect(self.show_history)
+
         #navbar 
         navbar = QToolBar()
         self.addToolBar(navbar)
-                
+        
+        navbar.addAction(history_action)        
         #backbutton
         backbutton = QAction(QIcon('./images/back.png'), '<-', self)
         backbutton.triggered.connect(self.navigate_back)
@@ -237,6 +247,13 @@ class MainWindow(QMainWindow):
     def navigate_reload(self):
         current_tab = self.tabs.currentWidget()
         current_tab.browser.reload()
+        
+    def show_history(self):
+        history, ok = QInputDialog.getItem(self, "History", "Select history", self.history.get_history(), 0, False)
+        if ok and history:
+            current_tab = self.tabs.currentWidget()
+            current_tab.navigate_to_url(history)     
+       
         
 app = QApplication(sys.argv)
 QApplication.setApplicationName("Overse")
