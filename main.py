@@ -169,18 +169,49 @@ class MainWindow(QMainWindow):
             }
 
             QLineEdit {
-                height: 25px;
+                height: 30px;
                 background-color: #fff;
                 color: #000;
+                border: 1px solid #000;
+                border-radius: 5px;
+                padding: 1px;
+                font-size: 16px;
             }
 
             QPushButton {
-                background-color: #f00;
+                background-color: #007BFF;
                 color: #fff;
-                height: 25px;
+                height: 30px;
+                border: none;
+                border-radius: 5px;
+                padding: 5px;
+            }
+
+            QPushButton:hover {
+                background-color: #0056b3;
+            }
+
+            QTabWidget::tab-bar {
+                alignment: center;
+            }
+
+            QTabWidget::pane {
                 border: none;
             }
+
+            QTabBar::tab {
+                background-color: #555;
+                color: #fff;
+                padding: 10px;
+                border-radius: 5px;
+                margin: 2px;
+            }
+
+            QTabBar::tab:selected {
+                background-color: #007BFF;
+            }
         """)
+
 
 
     def show_user_profile(self):
