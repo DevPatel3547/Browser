@@ -159,6 +159,7 @@ class MainWindow(QMainWindow):
         self.bookmarks = {}
         self.add_tab()
         
+        
         self.setStyleSheet("""
             QMainWindow {
                 background-color: #333;
