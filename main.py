@@ -164,6 +164,7 @@ class MainWindow(QMainWindow):
                 background-color: #333;
             }
 
+
             QToolBar {
                 background-color: #555;
             }
