@@ -21,8 +21,8 @@ Overse comes packed with essential features that make browsing a pleasure:
 - **Navigation Tools:** Includes the essential navigation tools - back, forward, and reload. Plus, a home button to get you back to your homepage.
 - **Bookmarks:** Like a page? Bookmark it! The Bookmark feature makes it easy to return to your favorite pages.
 - **User Profile:** Create and load user profiles for personalized browsing experiences.
-
-## Installation
+- **History** Stores and allows users to view their activity as well redirect to it.
+## Installation and Usage
 
 ### Requirements
 
@@ -38,24 +38,13 @@ cd Overse
 Install PyQt5 using pip:
 pip install PyQt5
 
-## Usage
 
 Once you've installed Overse, you're ready to begin browsing. Here's a quick guide to getting started:
 
-1. **Launching the Application:**
+**Launching the Application:**
    Open your terminal/command prompt and navigate to the directory containing `main.py`. Run the command: `python main.py`. 
 
-2. **Navigating the Web:**
-   You'll notice a navigation bar at the top. This includes back and forward buttons, a reload button, and a home button. Simply enter the URL of the site you wish to visit in the omnibox (address bar) and press 'Enter'.
 
-3. **Tabbed Browsing:**
-   To open a new tab, click on the 'Add Tab' action on the navigation bar. You can switch between tabs or close a tab using the 'x' on the tab.
-
-4. **Bookmarking a Page:**
-   If you find a page you'd like to revisit, you can bookmark it by clicking on the 'Bookmark' action. To visit a bookmarked page, use the 'Select Bookmark' action.
-
-5. **User Profile:**
-   You can create a new user profile by clicking on the 'User' action. Simply enter a username and password in the dialog box that appears.
 
 ## Contributing
 
