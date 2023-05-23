@@ -160,6 +160,7 @@ class MainWindow(QMainWindow):
         self.add_tab()
         
         
+        
         self.setStyleSheet("""
             QMainWindow {
                 background-color: #333;
